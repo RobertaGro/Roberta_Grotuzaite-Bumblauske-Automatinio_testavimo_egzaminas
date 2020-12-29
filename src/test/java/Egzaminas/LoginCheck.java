@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class Test1 {
+public class LoginCheck {
     private WebDriver driver;
     private String baseURL = "https://demo.opencart.com/";
 
@@ -65,7 +65,7 @@ public class Test1 {
         //7.	Patikrinti, jog rodomas error, kuris turi tekstą „Warning: No match for E-Mail Address and/or Password.“
         String warning = "Warning: No match for E-Mail Address and/or Password.";
         String alert = driver.findElement(By.cssSelector(".alert-danger")).getText();
-        assertEquals(alert, warning);
+        assertEquals(alert, warning, "The message is different from the initial warning.");
     }
 
 

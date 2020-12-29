@@ -14,9 +14,10 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-public class Test2 {
+public class DataProviderApplication {
     private WebDriver driver;
     private String baseURL = "https://demo.opencart.com/";
+    private String product = "//table[@class='table table-striped']//tr[1]//td[2]";
 
     private void invokeDriver() {
         ChromeOptions options = new ChromeOptions();
@@ -56,11 +57,11 @@ public class Test2 {
         showAll.click();
 
         // 4.	Patikrinti ar atsidarė MP3 Players kategorija (assert)
-        boolean categoryDisplayed = showAll.isDisplayed();
-        assertTrue(categoryDisplayed, "Show ALL MP3 Players kategorija nebuvo matoma");
+        String categoryName = driver.findElement(By.xpath(".//h2")).getText();
+        assertTrue(categoryName.contains("MP3 Players"), "Show ALL MP3 Players kategorija nebuvo matoma");
 
         // 5.	Paspausti mygtuką, jog produktus rodytų kaip sąrašą
-        WebElement list = driver.findElement(By.className("fa fa-th-list"));
+        WebElement list = driver.findElement(By.id("list-view"));
         list.click();
 
         // 6.	Iš data provider paimti produkto pavadinimą, surasti jį tarp produktų ir:
@@ -69,7 +70,8 @@ public class Test2 {
         addToCart.click();
 
         // Patikrinti, jog atsiranda žinutė „Success: You have added <Produkto pavadinimas> to your shopping cart!“
-        driver.getPageSource().contains("Success: You have added <Produkto pavadinimas> to your shopping cart!");
+        assertTrue(driver.findElement(By.cssSelector(".alert")).getText().contains("Success: You have added" + product + "to your shopping cart!"));
+        driver.findElement(By.cssSelector(".btn-inverse")).click();
 
          // 9.	Patikrinti, jog produktas buvo įdėtas į krepšelį (viršuje, dešinėje kampe esantis mini krepšelis )
 

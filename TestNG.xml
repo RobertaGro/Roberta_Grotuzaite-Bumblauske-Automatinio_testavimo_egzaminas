@@ -3,8 +3,8 @@
 <suite name="All Test Suite">
 <test name="All Test Suite">
     <classes>
-        <class name="Egzaminas.Test1"/>
-        <class name="Egzaminas.Test2"/>
+        <class name="Egzaminas.LoginCheck"/>
+        <class name="Egzaminas.DataProviderApplication"/>
     </classes>
 </test>
 </suite>
